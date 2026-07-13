@@ -1,0 +1,582 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const APP_STORE_URL = '#download';
+---
+<Base
+  title="Tally — The screen-time app that keeps count"
+  description="Tally tracks your iPhone app time to the exact minute. Need more? Borrow an exact number of minutes — and Tally remembers every time you broke your own rules. Private, on-device, no account."
+>
+  <Nav />
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <h1>Every minute counted.<br />Every override, too.</h1>
+          <p class="lede">
+            Plenty of apps block your screen time. Tally measures it — your
+            usage to the exact minute, overrides in exact minutes, and a
+            running count of every time you broke your own rules.
+          </p>
+          <div class="cta-row">
+            <a class="btn" href={APP_STORE_URL}>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+              </svg>
+              Download on the App Store
+            </a>
+            <a class="btn ghost" href="#how">See how it works</a>
+          </div>
+          <p class="hero-note">Free to try · iOS 17+ · No account needed</p>
+        </div>
+        <div class="hero-shot">
+          <div class="phone">
+            <img
+              src="/screens/usage.png"
+              alt="Tally usage screen showing a seven-day usage chart and per-app daily limits"
+              width="1320"
+              height="2868"
+              loading="eager"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pillars -->
+    <section class="pillars" id="how">
+      <div class="wrap pillar-grid">
+        <div class="pillar">
+          <div class="pillar-icon indigo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <path d="M4 19V12M10 19V5M16 19V9M22 19H2"/>
+            </svg>
+          </div>
+          <h3>Time, to the minute</h3>
+          <p>
+            No fuzzy summaries. Per-app, per-day numbers measured on-device —
+            when Tally says 56 minutes, it was 56 minutes.
+          </p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon teal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-4z"/>
+            </svg>
+          </div>
+          <h3>Overrides in exact minutes</h3>
+          <p>
+            Need more time? You don’t switch the rule off — you take a
+            measured dose. Five more minutes means five, counted down.
+          </p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon red">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <path d="M5 4.5v15M9.5 4.5v15M14 4.5v15M18.5 4.5v15M2.5 17L21.5 7"/>
+            </svg>
+          </div>
+          <h3>Every break on record</h3>
+          <p>
+            Tally remembers how many times you broke each rule, on which
+            days, and by how much. The score keeps you honest.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature: tracking -->
+    <section class="feature">
+      <div class="wrap feature-grid">
+        <div class="feature-copy">
+          <p class="eyebrow indigo-text">Tracking</p>
+          <h2>The exact number, not a feeling</h2>
+          <p>
+            Most screen-time reports are vague enough to ignore. Tally gives
+            you the real figure: how much you used each app today, live, and
+            the last seven days behind it. When the number is exact, you
+            can’t negotiate with it.
+          </p>
+          <ul>
+            <li>Live “used today” counter, accurate to the minute</li>
+            <li>Seven-day chart across all your limits</li>
+            <li>Per-app history for every rule you set</li>
+          </ul>
+        </div>
+        <div class="feature-shot">
+          <div class="phone">
+            <img src="/screens/usage.png" alt="Usage screen with seven-day chart and a list of app rules with toggles" width="1320" height="2868" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature: limits -->
+    <section class="feature flip">
+      <div class="wrap feature-grid">
+        <div class="feature-copy">
+          <p class="eyebrow teal-text">Limits</p>
+          <h2>Give every app a number</h2>
+          <p>
+            A limit in Tally is a precise daily budget: five minutes for
+            TikTok, twenty for Twitter, three hours for Telegram. Set it
+            once and Tally counts against it every day, automatically —
+            what’s used, what’s left, what’s next.
+          </p>
+          <ul>
+            <li>Daily budgets from 1 minute to hours</li>
+            <li>Limit a single app or a group of apps together</li>
+            <li>Counters reset each morning — no maintenance</li>
+          </ul>
+        </div>
+        <div class="feature-shot">
+          <div class="phone">
+            <img src="/screens/limits.png" alt="Limits screen listing six active app limits with their daily budgets" width="1320" height="2868" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature: overrides -->
+    <section class="feature">
+      <div class="wrap feature-grid">
+        <div class="feature-copy">
+          <p class="eyebrow red-text">Overrides</p>
+          <h2>Need more? Take exactly five minutes.</h2>
+          <p>
+            The weak point of every screen-time tool is the escape hatch —
+            an “ignore limit” button that switches the rule off entirely. In
+            Tally, an override isn’t an off switch. You take an exact number
+            of extra minutes, and the countdown keeps running.
+          </p>
+          <p>
+            Five more minutes means five. And every override is added to
+            your count — how many times, on which apps, for how long.
+          </p>
+        </div>
+        <div class="feature-shot">
+          <div class="phone">
+            <img src="/screens/limit-detail.png" alt="TikTok limit detail showing a 5-minute daily limit and last seven days of usage" width="1320" height="2868" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature: stats -->
+    <section class="feature flip">
+      <div class="wrap feature-grid">
+        <div class="feature-copy">
+          <p class="eyebrow indigo-text">The record</p>
+          <h2>How often do you break your own rules?</h2>
+          <p>
+            Tally can answer precisely: “Exceeded 9 of 12 days, 2h 25m over
+            limit.” Every broken rule lands on a per-app calendar — which
+            days, how many times, how far over. Not to shame you. Because a
+            number you can see is a number you can change.
+          </p>
+          <ul>
+            <li>Days over and under limit, per app, on a calendar</li>
+            <li>Override count and total time over — to the minute</li>
+            <li>Week, month, and year views to spot the pattern</li>
+          </ul>
+        </div>
+        <div class="feature-shot">
+          <div class="phone">
+            <img src="/screens/stats.png" alt="Stats screen with a monthly calendar highlighting days the Instagram limit was exceeded" width="1320" height="2868" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparison -->
+    <section class="compare">
+      <div class="wrap">
+        <h2>Plenty of apps block. Tally counts.</h2>
+        <p class="compare-lede">
+          Blocking is a solved problem. Measuring is what’s been missing.
+        </p>
+        <div class="compare-grid">
+          <div class="compare-card">
+            <p class="compare-problem">Their tracking is approximate</p>
+            <p class="compare-answer">
+              Weekly averages and rounded bars are easy to ignore. Tally
+              gives you the exact figure per app, per day, live against
+              your limit.
+            </p>
+          </div>
+          <div class="compare-card">
+            <p class="compare-problem">Their override is an off switch</p>
+            <p class="compare-answer">
+              “Ignore limit” disables the rule for the day. A Tally override
+              is an exact number of extra minutes — the countdown never
+              stops.
+            </p>
+          </div>
+          <div class="compare-card">
+            <p class="compare-problem">They forget you gave in</p>
+            <p class="compare-answer">
+              Tally keeps score of every broken rule: how many times, which
+              days, how far over. That history is what actually changes
+              behavior.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Privacy -->
+    <section class="privacy">
+      <div class="wrap privacy-inner">
+        <h2>Your usage data stays on your iPhone.</h2>
+        <p>
+          Tally is built on Apple’s Screen Time framework, which means your
+          app activity is processed entirely on-device. There is no account
+          to create, no server receiving your data, and no analytics watching
+          you. <a href="/privacy">Read the privacy policy →</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final" id="download">
+      <div class="wrap final-inner">
+        <h2>Your rules, your numbers.<br />Tally keeps the count.</h2>
+        <a class="btn" href={APP_STORE_URL}>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+          </svg>
+          Download on the App Store
+        </a>
+        <p class="hero-note">Free to try · iOS 17+ · No account needed</p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  /* ---- Hero ---- */
+  .hero {
+    padding: 96px 0 32px;
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+    gap: 48px;
+  }
+
+  h1 {
+    font-size: clamp(40px, 6vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+  }
+
+  .lede {
+    margin-top: 24px;
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--text-dim);
+    max-width: 34em;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 14px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+  }
+
+  .hero-note {
+    margin-top: 18px;
+    font-size: 14px;
+    color: var(--text-faint);
+  }
+
+  .hero-shot {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* ---- Phone frame ---- */
+  .phone {
+    width: min(320px, 80vw);
+    border-radius: 44px;
+    padding: 10px;
+    background: #1a1a1f;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow:
+      0 40px 80px -24px rgba(0, 0, 0, 0.7),
+      0 0 120px -40px rgba(124, 124, 240, 0.35);
+  }
+
+  .phone img {
+    border-radius: 34px;
+    width: 100%;
+    height: auto;
+  }
+
+  /* ---- Pillars ---- */
+  .pillars {
+    padding: 88px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  .pillar-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+
+  .pillar-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .pillar-icon.indigo {
+    background: rgba(124, 124, 240, 0.15);
+    color: var(--indigo);
+  }
+
+  .pillar-icon.teal {
+    background: rgba(62, 184, 169, 0.15);
+    color: var(--teal);
+  }
+
+  .pillar-icon.red {
+    background: rgba(240, 85, 74, 0.14);
+    color: var(--red);
+  }
+
+  .pillar h3 {
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+
+  .pillar p {
+    color: var(--text-dim);
+    font-size: 16px;
+  }
+
+  /* ---- Features ---- */
+  .feature {
+    padding: 72px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 64px;
+  }
+
+  .flip .feature-grid .feature-copy {
+    order: 2;
+  }
+
+  .flip .feature-grid .feature-shot {
+    order: 1;
+  }
+
+  .feature-shot {
+    display: flex;
+    justify-content: center;
+  }
+
+  .feature-shot .phone {
+    width: min(300px, 76vw);
+    box-shadow: 0 32px 64px -24px rgba(0, 0, 0, 0.7);
+  }
+
+  .eyebrow {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 14px;
+  }
+
+  .indigo-text { color: var(--indigo); }
+  .teal-text { color: var(--teal); }
+  .red-text { color: var(--red); }
+
+  h2 {
+    font-size: clamp(28px, 4vw, 38px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-weight: 750;
+  }
+
+  .feature-copy > p {
+    margin-top: 18px;
+    color: var(--text-dim);
+  }
+
+  .feature-copy ul {
+    margin-top: 22px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .feature-copy li {
+    color: var(--text-dim);
+    padding-left: 28px;
+    position: relative;
+  }
+
+  .feature-copy li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 14px;
+    height: 8px;
+    border-left: 2px solid var(--teal);
+    border-bottom: 2px solid var(--teal);
+    transform: rotate(-45deg) scale(0.8);
+  }
+
+  /* ---- Comparison ---- */
+  .compare {
+    padding: 96px 0;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .compare-lede {
+    margin-top: 14px;
+    color: var(--text-dim);
+    font-size: 19px;
+  }
+
+  .compare-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 48px;
+    text-align: left;
+  }
+
+  .compare-card {
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+  }
+
+  .compare-problem {
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+  }
+
+  .compare-answer {
+    margin-top: 10px;
+    color: var(--text-dim);
+    font-size: 15.5px;
+  }
+
+  /* ---- Privacy ---- */
+  .privacy {
+    padding: 96px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .privacy-inner {
+    max-width: 720px;
+    text-align: center;
+  }
+
+  .privacy p {
+    margin-top: 20px;
+    color: var(--text-dim);
+    font-size: 18px;
+  }
+
+  .privacy a {
+    color: var(--indigo);
+  }
+
+  .privacy a:hover {
+    text-decoration: underline;
+  }
+
+  /* ---- Final CTA ---- */
+  .final {
+    padding: 112px 0 128px;
+    border-top: 1px solid var(--border);
+  }
+
+  .final-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 32px;
+  }
+
+  .final h2 {
+    font-size: clamp(32px, 5vw, 52px);
+  }
+
+  .final .hero-note {
+    margin-top: -12px;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 860px) {
+    .hero {
+      padding-top: 64px;
+    }
+
+    .hero-grid,
+    .feature-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .flip .feature-grid .feature-copy {
+      order: 1;
+    }
+
+    .flip .feature-grid .feature-shot {
+      order: 2;
+    }
+
+    .pillar-grid,
+    .compare-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .compare {
+      text-align: left;
+    }
+
+    .privacy-inner {
+      text-align: left;
+    }
+  }
+</style>

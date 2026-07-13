@@ -1,0 +1,141 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const faqs = [
+  {
+    q: 'Why does Tally ask for Screen Time permission?',
+    a: 'Tally is built on Apple’s Screen Time framework. That permission is what allows it to measure how long you use each app and to block apps when a limit runs out. The data is processed on-device by Apple’s APIs and never leaves your iPhone.',
+  },
+  {
+    q: 'What happens when I hit a limit?',
+    a: 'The app is blocked for the rest of the day. If you genuinely need back in, you can override the block for an exact number of extra minutes — the countdown keeps running, and the override is added to your stats so you can see how often you break each rule.',
+  },
+  {
+    q: 'Do limits reset automatically?',
+    a: 'Yes. Every limit resets at the start of each day. Set a rule once and Tally enforces it daily with no maintenance.',
+  },
+  {
+    q: 'Can I limit several apps with one rule?',
+    a: 'Yes. A rule can cover a single app or a group of apps that share one time budget.',
+  },
+  {
+    q: 'Does Tally drain my battery or track me?',
+    a: 'No. Tally has no background network activity, no analytics, and no servers. Usage monitoring is handled by iOS itself, which is highly efficient.',
+  },
+  {
+    q: 'How do I delete my data?',
+    a: 'Delete the app. All rules, usage history, and stats live only on your iPhone, so removing Tally removes everything.',
+  },
+];
+---
+<Base
+  title="Support — Tally"
+  description="Answers to common questions about Tally, plus how to reach us."
+>
+  <Nav />
+
+  <main class="wrap doc">
+    <h1>Support</h1>
+    <p class="intro">
+      Stuck, found a bug, or have an idea? Email
+      <a href="mailto:dmytro.bohachevskyy@gmail.com">dmytro.bohachevskyy@gmail.com</a>
+      and you’ll get a reply from the person who builds Tally — usually within
+      a day or two.
+    </p>
+
+    <h2>Frequently asked questions</h2>
+    <div class="faqs">
+      {faqs.map((f) => (
+        <details>
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .doc {
+    max-width: 720px;
+    padding-top: 80px;
+    padding-bottom: 96px;
+  }
+
+  h1 {
+    font-size: 40px;
+    letter-spacing: -0.02em;
+    font-weight: 800;
+  }
+
+  .intro {
+    color: var(--text-dim);
+    margin-top: 16px;
+    font-size: 18px;
+  }
+
+  a {
+    color: var(--indigo);
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  h2 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-top: 56px;
+    margin-bottom: 20px;
+  }
+
+  .faqs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  details {
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 22px;
+  }
+
+  summary {
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    position: relative;
+    padding-right: 28px;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-faint);
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  details[open] summary::after {
+    content: '–';
+  }
+
+  details p {
+    margin-top: 12px;
+    color: var(--text-dim);
+  }
+</style>

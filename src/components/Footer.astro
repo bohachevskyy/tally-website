@@ -1,0 +1,67 @@
+---
+const year = new Date().getFullYear();
+---
+<footer>
+  <div class="wrap inner">
+    <div class="brand">
+      <span class="name">Tally</span>
+      <span class="tag">The screen-time app that keeps count.</span>
+    </div>
+    <nav>
+      <a href="/privacy">Privacy</a>
+      <a href="/support">Support</a>
+      <a href="mailto:dmytro.bohachevskyy@gmail.com">Contact</a>
+    </nav>
+  </div>
+  <div class="wrap legal">
+    © {year} Tally. Made for people who want their time back.
+  </div>
+</footer>
+
+<style>
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 48px 0 40px;
+  }
+
+  .inner {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .name {
+    font-weight: 700;
+    font-size: 17px;
+  }
+
+  .tag {
+    color: var(--text-faint);
+    font-size: 14px;
+  }
+
+  nav {
+    display: flex;
+    gap: 28px;
+    font-size: 15px;
+    color: var(--text-dim);
+  }
+
+  nav a:hover {
+    color: var(--text);
+  }
+
+  .legal {
+    margin-top: 36px;
+    color: var(--text-faint);
+    font-size: 13px;
+  }
+</style>

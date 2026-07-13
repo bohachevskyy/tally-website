@@ -1,0 +1,120 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+<Base
+  title="Privacy Policy — Tally"
+  description="Tally processes all screen-time data on your device. No account, no servers, no analytics."
+>
+  <Nav />
+
+  <main class="wrap doc">
+    <h1>Privacy Policy</h1>
+    <p class="updated">Last updated: July 12, 2026</p>
+
+    <p>
+      Tally is built so that we couldn’t see your data even if we wanted to.
+      This page explains what that means in practice.
+    </p>
+
+    <h2>What Tally collects</h2>
+    <p>
+      Nothing. Tally has no account system, no analytics SDK, and no backend
+      servers. We do not collect, store, transmit, or sell any personal
+      information or usage data.
+    </p>
+
+    <h2>How screen-time data works</h2>
+    <p>
+      Tally uses Apple’s Screen Time framework (the Family Controls,
+      Device Activity, and Managed Settings APIs) to measure app usage and
+      enforce limits. Apple designed these APIs so that usage data is
+      processed entirely on your device, inside a sandbox the app itself has
+      only limited visibility into. Your app activity never leaves your
+      iPhone.
+    </p>
+
+    <h2>What stays on your device</h2>
+    <ul>
+      <li>The limits and rules you create</li>
+      <li>Your usage history and statistics</li>
+      <li>Your override history</li>
+    </ul>
+    <p>
+      All of it lives in local storage on your iPhone. Deleting the app
+      deletes this data.
+    </p>
+
+    <h2>Third parties</h2>
+    <p>
+      Tally embeds no third-party trackers, ad networks, or analytics tools.
+    </p>
+
+    <h2>Changes to this policy</h2>
+    <p>
+      If this policy ever changes, the updated version will be posted on this
+      page with a new date. Because Tally has no way to contact you, we
+      recommend checking back after major app updates.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      Questions about privacy? Email
+      <a href="mailto:dmytro.bohachevskyy@gmail.com">dmytro.bohachevskyy@gmail.com</a>.
+    </p>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .doc {
+    max-width: 720px;
+    padding-top: 80px;
+    padding-bottom: 96px;
+  }
+
+  h1 {
+    font-size: 40px;
+    letter-spacing: -0.02em;
+    font-weight: 800;
+  }
+
+  .updated {
+    color: var(--text-faint);
+    font-size: 14px;
+    margin-top: 8px;
+    margin-bottom: 40px;
+  }
+
+  h2 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-top: 44px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    color: var(--text-dim);
+    margin-bottom: 16px;
+  }
+
+  ul {
+    color: var(--text-dim);
+    padding-left: 24px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  a {
+    color: var(--indigo);
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
