@@ -7,7 +7,7 @@ const APP_STORE_URL = '#download';
 ---
 <Base
   title="Tally — The screen-time app that keeps count"
-  description="Tally tracks your iPhone app time to the exact minute. Need more? Borrow an exact number of minutes — and Tally remembers every time you broke your own rules. Private, on-device, no account."
+  description="Tally shows how long you really spend in each app. Need more time? Borrow a set number of minutes — and Tally keeps count of every time you broke your own rules. Private, on-device, no account."
 >
   <Nav />
 
@@ -16,11 +16,11 @@ const APP_STORE_URL = '#download';
     <section class="hero">
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <h1>Every minute counted.<br />Every override, too.</h1>
+          <h1>Tally every slip.</h1>
           <p class="lede">
-            Plenty of apps block your screen time. Tally measures it — your
-            usage to the exact minute, overrides in exact minutes, and a
-            running count of every time you broke your own rules.
+            Plenty of apps block your screen time. Tally measures it — real
+            usage numbers, overrides you pay for in minutes, and a running
+            count of every time you broke your own rules.
           </p>
           <div class="cta-row">
             <a class="btn" href={APP_STORE_URL}>
@@ -56,10 +56,10 @@ const APP_STORE_URL = '#download';
               <path d="M4 19V12M10 19V5M16 19V9M22 19H2"/>
             </svg>
           </div>
-          <h3>Time, to the minute</h3>
+          <h3>Real usage numbers</h3>
           <p>
-            No fuzzy summaries. Per-app, per-day numbers measured on-device —
-            when Tally says 56 minutes, it was 56 minutes.
+            No fuzzy weekly averages. Per-app, per-day figures measured
+            on-device and shown against the limit you set.
           </p>
         </div>
         <div class="pillar">
@@ -68,10 +68,10 @@ const APP_STORE_URL = '#download';
               <path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-4z"/>
             </svg>
           </div>
-          <h3>Overrides in exact minutes</h3>
+          <h3>Overrides cost minutes</h3>
           <p>
-            Need more time? You don’t switch the rule off — you take a
-            measured dose. Five more minutes means five, counted down.
+            Need more time? You don’t switch the rule off — you borrow a set
+            number of minutes, and the clock keeps running.
           </p>
         </div>
         <div class="pillar">
@@ -94,15 +94,15 @@ const APP_STORE_URL = '#download';
       <div class="wrap feature-grid">
         <div class="feature-copy">
           <p class="eyebrow indigo-text">Tracking</p>
-          <h2>The exact number, not a feeling</h2>
+          <h2>A number, not a feeling</h2>
           <p>
             Most screen-time reports are vague enough to ignore. Tally gives
             you the real figure: how much you used each app today, live, and
-            the last seven days behind it. When the number is exact, you
-            can’t negotiate with it.
+            the last seven days behind it. A number you can see is one you
+            can’t negotiate with.
           </p>
           <ul>
-            <li>Live “used today” counter, accurate to the minute</li>
+            <li>Live “used today” counter for every app</li>
             <li>Seven-day chart across all your limits</li>
             <li>Per-app history for every rule you set</li>
           </ul>
@@ -146,16 +146,16 @@ const APP_STORE_URL = '#download';
       <div class="wrap feature-grid">
         <div class="feature-copy">
           <p class="eyebrow red-text">Overrides</p>
-          <h2>Need more? Take exactly five minutes.</h2>
+          <h2>Need more? Borrow five minutes.</h2>
           <p>
             The weak point of every screen-time tool is the escape hatch —
             an “ignore limit” button that switches the rule off entirely. In
-            Tally, an override isn’t an off switch. You take an exact number
-            of extra minutes, and the countdown keeps running.
+            Tally, an override isn’t an off switch. You borrow a set number
+            of extra minutes, and the clock keeps running.
           </p>
           <p>
-            Five more minutes means five. And every override is added to
-            your count — how many times, on which apps, for how long.
+            Every override is added to your count — how many times, on which
+            apps, for how long.
           </p>
         </div>
         <div class="feature-shot">
@@ -180,49 +180,13 @@ const APP_STORE_URL = '#download';
           </p>
           <ul>
             <li>Days over and under limit, per app, on a calendar</li>
-            <li>Override count and total time over — to the minute</li>
+            <li>Override count and total time over your limit</li>
             <li>Week, month, and year views to spot the pattern</li>
           </ul>
         </div>
         <div class="feature-shot">
           <div class="phone">
             <img src="/screens/stats.png" alt="Stats screen with a monthly calendar highlighting days the Instagram limit was exceeded" width="1320" height="2868" loading="lazy" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Comparison -->
-    <section class="compare">
-      <div class="wrap">
-        <h2>Plenty of apps block. Tally counts.</h2>
-        <p class="compare-lede">
-          Blocking is a solved problem. Measuring is what’s been missing.
-        </p>
-        <div class="compare-grid">
-          <div class="compare-card">
-            <p class="compare-problem">Their tracking is approximate</p>
-            <p class="compare-answer">
-              Weekly averages and rounded bars are easy to ignore. Tally
-              gives you the exact figure per app, per day, live against
-              your limit.
-            </p>
-          </div>
-          <div class="compare-card">
-            <p class="compare-problem">Their override is an off switch</p>
-            <p class="compare-answer">
-              “Ignore limit” disables the rule for the day. A Tally override
-              is an exact number of extra minutes — the countdown never
-              stops.
-            </p>
-          </div>
-          <div class="compare-card">
-            <p class="compare-problem">They forget you gave in</p>
-            <p class="compare-answer">
-              Tally keeps score of every broken rule: how many times, which
-              days, how far over. That history is what actually changes
-              behavior.
-            </p>
           </div>
         </div>
       </div>
@@ -459,46 +423,6 @@ const APP_STORE_URL = '#download';
     transform: rotate(-45deg) scale(0.8);
   }
 
-  /* ---- Comparison ---- */
-  .compare {
-    padding: 96px 0;
-    border-top: 1px solid var(--border);
-    text-align: center;
-  }
-
-  .compare-lede {
-    margin-top: 14px;
-    color: var(--text-dim);
-    font-size: 19px;
-  }
-
-  .compare-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-top: 48px;
-    text-align: left;
-  }
-
-  .compare-card {
-    background: var(--bg-raised);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 28px;
-  }
-
-  .compare-problem {
-    font-weight: 700;
-    font-size: 17px;
-    letter-spacing: -0.01em;
-  }
-
-  .compare-answer {
-    margin-top: 10px;
-    color: var(--text-dim);
-    font-size: 15.5px;
-  }
-
   /* ---- Privacy ---- */
   .privacy {
     padding: 96px 0;
@@ -566,13 +490,8 @@ const APP_STORE_URL = '#download';
       order: 2;
     }
 
-    .pillar-grid,
-    .compare-grid {
+    .pillar-grid {
       grid-template-columns: 1fr;
-    }
-
-    .compare {
-      text-align: left;
     }
 
     .privacy-inner {
