@@ -1,46 +1,92 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import AppStoreButton from '../components/AppStoreButton.astro';
+import { faqs } from '../data/faqs';
+import { SITE_URL, APP_STORE_URL } from '../config';
 
-const APP_STORE_URL = '#download';
+import usageShot from '../assets/screens/usage.png';
+import limitsShot from '../assets/screens/limits.png';
+import detailShot from '../assets/screens/limit-detail.png';
+import statsShot from '../assets/screens/stats.png';
+
+const title = 'Tally: free screen time limits for iPhone that keep count';
+const description =
+  'Tally is a free iPhone app that sets daily app limits, shows how much time you really spend in each app, and counts every time you break your own rules. No ads, no subscription, no account. Your data stays on your phone.';
+
+const phoneSizes = '(max-width: 860px) 76vw, 300px';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'MobileApplication',
+    name: 'Tally',
+    alternateName: 'Tally — Screen Time Limits',
+    url: SITE_URL,
+    description,
+    operatingSystem: 'iOS 17.0 or later',
+    applicationCategory: 'LifestyleApplication',
+    image: `${SITE_URL}/icon-512.png`,
+    screenshot: `${SITE_URL}/og.png`,
+    ...(APP_STORE_URL ? { installUrl: APP_STORE_URL, downloadUrl: APP_STORE_URL } : {}),
+    isAccessibleForFree: true,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    featureList: [
+      'Daily time limits per app or group of apps',
+      'Different limits for each day of the week',
+      'Live per-app usage with 7, 14 and 30-day charts',
+      'Overrides that grant a set number of extra minutes',
+      'Calendar of days you exceeded each limit',
+      'On-device only: no account, no analytics, no ads',
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
 ---
-<Base
-  title="Tally — The screen-time app that keeps count"
-  description="Tally shows how long you really spend in each app. Need more time? Borrow a set number of minutes — and Tally keeps count of every time you broke your own rules. Private, on-device, no account."
->
+<Base title={title} description={description} jsonLd={jsonLd}>
   <Nav />
 
-  <main>
+  <main id="main">
     <!-- Hero -->
     <section class="hero">
       <div class="wrap hero-grid">
         <div class="hero-copy">
+          <p class="free-pill"><span>100% free</span> No ads · No subscription · No account</p>
           <h1>Tally every slip.</h1>
           <p class="lede">
-            Plenty of apps block your screen time. Tally measures it — real
-            usage numbers, overrides you pay for in minutes, and a running
-            count of every time you broke your own rules.
+            Lots of apps block your screen time. Tally also measures it. You
+            get real usage numbers, extra time that comes in counted minutes,
+            and a running tally of every time you broke your own rules.
           </p>
           <div class="cta-row">
-            <a class="btn" href={APP_STORE_URL}>
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
-              </svg>
-              Download on the App Store
-            </a>
-            <a class="btn ghost" href="#how">See how it works</a>
+            <AppStoreButton />
+            <a class="btn ghost" href="#features">See how it works</a>
           </div>
-          <p class="hero-note">Free to try · iOS 17+ · No account needed</p>
+          <p class="hero-note">Free for iPhone · iOS 17+ · Your data stays on your phone</p>
         </div>
-        <div class="hero-shot">
-          <div class="phone">
-            <img
-              src="/screens/usage.png"
-              alt="Tally usage screen showing a seven-day usage chart and per-app daily limits"
-              width="1320"
-              height="2868"
+        <div class="hero-shot" aria-hidden="false">
+          <div class="phone back">
+            <Image src={statsShot} alt="" widths={[300, 600]} sizes="260px" format="webp" loading="eager" />
+          </div>
+          <div class="phone front">
+            <Image
+              src={usageShot}
+              alt="Tally's Usage screen with a seven-day usage chart and daily limits for each app"
+              widths={[320, 640]}
+              sizes="(max-width: 860px) 70vw, 300px"
+              format="webp"
               loading="eager"
+              fetchpriority="high"
             />
           </div>
         </div>
@@ -48,7 +94,7 @@ const APP_STORE_URL = '#download';
     </section>
 
     <!-- Pillars -->
-    <section class="pillars" id="how">
+    <section class="pillars" aria-label="Why Tally">
       <div class="wrap pillar-grid">
         <div class="pillar">
           <div class="pillar-icon indigo">
@@ -56,22 +102,22 @@ const APP_STORE_URL = '#download';
               <path d="M4 19V12M10 19V5M16 19V9M22 19H2"/>
             </svg>
           </div>
-          <h3>Real usage numbers</h3>
+          <h2 class="h3">Real usage numbers</h2>
           <p>
-            No fuzzy weekly averages. Per-app, per-day figures measured
-            on-device and shown against the limit you set.
+            Usage for each app, for each day, measured on your iPhone and
+            shown next to the limit you set.
           </p>
         </div>
         <div class="pillar">
           <div class="pillar-icon teal">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-4z"/>
+              <circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9.5 2h5"/>
             </svg>
           </div>
-          <h3>Overrides cost minutes</h3>
+          <h2 class="h3">Extra time is counted</h2>
           <p>
-            Need more time? You don’t switch the rule off — you borrow a set
-            number of minutes, and the clock keeps running.
+            Need more time? The rule stays on. You give yourself a set number
+            of extra minutes, and the clock keeps running.
           </p>
         </div>
         <div class="pillar">
@@ -80,36 +126,36 @@ const APP_STORE_URL = '#download';
               <path d="M5 4.5v15M9.5 4.5v15M14 4.5v15M18.5 4.5v15M2.5 17L21.5 7"/>
             </svg>
           </div>
-          <h3>Every break on record</h3>
+          <h2 class="h3">Every slip on record</h2>
           <p>
-            Tally remembers how many times you broke each rule, on which
-            days, and by how much. The score keeps you honest.
+            Tally remembers how often you broke each rule, on which days,
+            and by how much. Keeping score keeps you honest.
           </p>
         </div>
       </div>
     </section>
 
     <!-- Feature: tracking -->
-    <section class="feature">
+    <section class="feature" id="features">
       <div class="wrap feature-grid">
         <div class="feature-copy">
           <p class="eyebrow indigo-text">Tracking</p>
           <h2>A number, not a feeling</h2>
           <p>
-            Most screen-time reports are vague enough to ignore. Tally gives
-            you the real figure: how much you used each app today, live, and
-            the last seven days behind it. A number you can see is one you
-            can’t negotiate with.
+            Most screen-time reports are vague enough to ignore. Tally shows
+            the actual figure: how long you've used each app today, updated
+            live, with your recent history right below it. It's hard to argue
+            with a number you can see.
           </p>
           <ul>
-            <li>Live “used today” counter for every app</li>
-            <li>Seven-day chart across all your limits</li>
-            <li>Per-app history for every rule you set</li>
+            <li>A live "used today" count for every app</li>
+            <li>7, 14, or 30-day charts across all your limits</li>
+            <li>Each rule gets its own color, so trends stand out</li>
           </ul>
         </div>
         <div class="feature-shot">
           <div class="phone">
-            <img src="/screens/usage.png" alt="Usage screen with seven-day chart and a list of app rules with toggles" width="1320" height="2868" loading="lazy" />
+            <Image src={usageShot} alt="Usage screen with a colored seven-day chart and a list of app rules" widths={[300, 600]} sizes={phoneSizes} format="webp" loading="lazy" />
           </div>
         </div>
       </div>
@@ -122,20 +168,21 @@ const APP_STORE_URL = '#download';
           <p class="eyebrow teal-text">Limits</p>
           <h2>Give every app a number</h2>
           <p>
-            A limit in Tally is a precise daily budget: five minutes for
-            TikTok, twenty for Twitter, three hours for Telegram. Set it
-            once and Tally counts against it every day, automatically —
-            what’s used, what’s left, what’s next.
+            A limit in Tally is an exact daily budget: five minutes for
+            TikTok, twenty for Twitter, three hours for Telegram. Set it once and Tally
+            counts against it every day. When the time is up, the app gets
+            blocked.
           </p>
           <ul>
-            <li>Daily budgets from 1 minute to hours</li>
-            <li>Limit a single app or a group of apps together</li>
-            <li>Counters reset each morning — no maintenance</li>
+            <li>Limit one app or a whole group with a shared budget</li>
+            <li>Set a different limit for each day of the week</li>
+            <li>Set a day to zero and the app stays blocked all day</li>
+            <li>Limits reset at midnight, so there's nothing to maintain</li>
           </ul>
         </div>
         <div class="feature-shot">
           <div class="phone">
-            <img src="/screens/limits.png" alt="Limits screen listing six active app limits with their daily budgets" width="1320" height="2868" loading="lazy" />
+            <Image src={limitsShot} alt="Rules screen listing six app limits with their daily budgets" widths={[300, 600]} sizes={phoneSizes} format="webp" loading="lazy" />
           </div>
         </div>
       </div>
@@ -146,21 +193,21 @@ const APP_STORE_URL = '#download';
       <div class="wrap feature-grid">
         <div class="feature-copy">
           <p class="eyebrow red-text">Overrides</p>
-          <h2>Need more? Borrow five minutes.</h2>
+          <h2>Need more? Take five minutes.</h2>
           <p>
-            The weak point of every screen-time tool is the escape hatch —
-            an “ignore limit” button that switches the rule off entirely. In
-            Tally, an override isn’t an off switch. You borrow a set number
-            of extra minutes, and the clock keeps running.
+            The weak spot in most screen-time tools is the escape hatch. One
+            tap on "ignore limit" and the rule is gone for the day. Tally
+            doesn't have an off switch. From the block screen you add a set
+            number of minutes, and the clock keeps running.
           </p>
           <p>
-            Every override is added to your count — how many times, on which
-            apps, for how long.
+            Every override gets counted: how many times, on which apps, and
+            for how long.
           </p>
         </div>
         <div class="feature-shot">
           <div class="phone">
-            <img src="/screens/limit-detail.png" alt="TikTok limit detail showing a 5-minute daily limit and last seven days of usage" width="1320" height="2868" loading="lazy" />
+            <Image src={detailShot} alt="TikTok rule showing a 5-minute daily limit and the last seven days of usage" widths={[300, 600]} sizes={phoneSizes} format="webp" loading="lazy" />
           </div>
         </div>
       </div>
@@ -173,34 +220,82 @@ const APP_STORE_URL = '#download';
           <p class="eyebrow indigo-text">The record</p>
           <h2>How often do you break your own rules?</h2>
           <p>
-            Tally can answer precisely: “Exceeded 9 of 12 days, 2h 25m over
-            limit.” Every broken rule lands on a per-app calendar — which
-            days, how many times, how far over. Not to shame you. Because a
-            number you can see is a number you can change.
+            Tally gives you the exact answer, like "Exceeded 9 of 12 days,
+            2h 25m over limit." Every broken rule shows up on a calendar for
+            that app, with the days, the count, and how far over you went.
+            The point isn't guilt. It's that a number you can see is a number
+            you can change.
           </p>
           <ul>
-            <li>Days over and under limit, per app, on a calendar</li>
-            <li>Override count and total time over your limit</li>
-            <li>Week, month, and year views to spot the pattern</li>
+            <li>A calendar of days over and under each limit</li>
+            <li>How many overrides, and the total time over your limits</li>
+            <li>Week, month, and year views to spot patterns</li>
           </ul>
         </div>
         <div class="feature-shot">
           <div class="phone">
-            <img src="/screens/stats.png" alt="Stats screen with a monthly calendar highlighting days the Instagram limit was exceeded" width="1320" height="2868" loading="lazy" />
+            <Image src={statsShot} alt="Stats screen with a monthly calendar marking the days the Instagram limit was exceeded" widths={[300, 600]} sizes={phoneSizes} format="webp" loading="lazy" />
           </div>
         </div>
       </div>
     </section>
 
+    <!-- Free -->
+    <section class="free" aria-labelledby="free-title">
+      <div class="wrap">
+        <div class="free-card">
+          <div class="free-head">
+            <p class="price"><span class="cur">$</span>0</p>
+            <div>
+              <h2 id="free-title">Free. Not a free trial.</h2>
+              <p>Every feature comes with the download, and you'll never be asked for money.</p>
+            </div>
+          </div>
+          <ul class="free-list">
+            <li>No subscription</li>
+            <li>No in-app purchases</li>
+            <li>No ads</li>
+            <li>No account or sign-up</li>
+            <li>Unlimited rules</li>
+            <li>Full history and stats</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <!-- Privacy -->
-    <section class="privacy">
+    <section class="privacy" id="privacy">
       <div class="wrap privacy-inner">
+        <div class="pillar-icon teal lock" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+          </svg>
+        </div>
         <h2>Your usage data stays on your iPhone.</h2>
         <p>
-          Tally is built on Apple’s Screen Time framework, which means your
-          app activity is processed entirely on-device. There is no account
-          to create, no server receiving your data, and no analytics watching
-          you. <a href="/privacy">Read the privacy policy →</a>
+          Tally is built on Apple's Screen Time framework, so your app
+          activity is processed entirely on your iPhone. There's no account to
+          create, no server collecting your data, and no analytics. You don't
+          pay with money, and you don't pay with your data either.
+          <a href="/privacy/">Read the privacy policy →</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+      <div class="wrap faq-inner">
+        <h2>Questions</h2>
+        <div class="faqs">
+          {faqs.map((f, i) => (
+            <details open={i === 0}>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
+        <p class="faq-more">
+          Still stuck? <a href="/support/">Get support →</a>
         </p>
       </div>
     </section>
@@ -208,14 +303,9 @@ const APP_STORE_URL = '#download';
     <!-- Final CTA -->
     <section class="final" id="download">
       <div class="wrap final-inner">
-        <h2>Your rules, your numbers.<br />Tally keeps the count.</h2>
-        <a class="btn" href={APP_STORE_URL}>
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
-          </svg>
-          Download on the App Store
-        </a>
-        <p class="hero-note">Free to try · iOS 17+ · No account needed</p>
+        <h2>Your rules, your numbers.<br />Tally keeps count.</h2>
+        <AppStoreButton />
+        <p class="hero-note">Free for iPhone · iOS 17+ · No account needed</p>
       </div>
     </section>
   </main>
@@ -226,21 +316,56 @@ const APP_STORE_URL = '#download';
 <style>
   /* ---- Hero ---- */
   .hero {
-    padding: 96px 0 32px;
+    padding: 88px 0 56px;
     overflow: hidden;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: -20% -10% auto auto;
+    width: 720px;
+    height: 720px;
+    background: radial-gradient(closest-side, rgba(97, 107, 211, 0.28), transparent);
+    pointer-events: none;
   }
 
   .hero-grid {
     display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
+    grid-template-columns: 1.1fr 0.9fr;
     align-items: center;
     gap: 48px;
+    position: relative;
+  }
+
+  .free-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    background: var(--bg-raised);
+    border-radius: 999px;
+    padding: 5px 14px 5px 5px;
+    margin-bottom: 26px;
+  }
+
+  .free-pill span {
+    background: var(--teal);
+    color: #04201c;
+    font-weight: 700;
+    font-size: 13px;
+    border-radius: 999px;
+    padding: 2px 10px;
+    white-space: nowrap;
   }
 
   h1 {
-    font-size: clamp(40px, 6vw, 64px);
-    line-height: 1.05;
-    letter-spacing: -0.03em;
+    font-size: clamp(44px, 7vw, 72px);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
     font-weight: 800;
   }
 
@@ -249,7 +374,7 @@ const APP_STORE_URL = '#download';
     font-size: 20px;
     line-height: 1.55;
     color: var(--text-dim);
-    max-width: 34em;
+    max-width: 32em;
   }
 
   .cta-row {
@@ -266,13 +391,32 @@ const APP_STORE_URL = '#download';
   }
 
   .hero-shot {
+    position: relative;
     display: flex;
     justify-content: center;
+    min-height: 560px;
+  }
+
+  .hero-shot .front {
+    width: min(300px, 70vw);
+    position: relative;
+    z-index: 2;
+    transform: translateX(-36px);
+  }
+
+  .hero-shot .back {
+    position: absolute;
+    width: 260px;
+    top: 48px;
+    right: -8px;
+    transform: rotate(6deg);
+    opacity: 0.55;
+    z-index: 1;
   }
 
   /* ---- Phone frame ---- */
   .phone {
-    width: min(320px, 80vw);
+    width: min(300px, 76vw);
     border-radius: 44px;
     padding: 10px;
     background: #1a1a1f;
@@ -290,7 +434,7 @@ const APP_STORE_URL = '#download';
 
   /* ---- Pillars ---- */
   .pillars {
-    padding: 88px 0;
+    padding: 80px 0;
     border-top: 1px solid var(--border);
   }
 
@@ -315,22 +459,11 @@ const APP_STORE_URL = '#download';
     height: 22px;
   }
 
-  .pillar-icon.indigo {
-    background: rgba(124, 124, 240, 0.15);
-    color: var(--indigo);
-  }
+  .pillar-icon.indigo { background: rgba(124, 124, 240, 0.15); color: var(--indigo); }
+  .pillar-icon.teal { background: rgba(62, 184, 169, 0.15); color: var(--teal); }
+  .pillar-icon.red { background: rgba(240, 85, 74, 0.14); color: var(--red); }
 
-  .pillar-icon.teal {
-    background: rgba(62, 184, 169, 0.15);
-    color: var(--teal);
-  }
-
-  .pillar-icon.red {
-    background: rgba(240, 85, 74, 0.14);
-    color: var(--red);
-  }
-
-  .pillar h3 {
+  .h3 {
     font-size: 19px;
     font-weight: 700;
     letter-spacing: -0.01em;
@@ -355,13 +488,8 @@ const APP_STORE_URL = '#download';
     gap: 64px;
   }
 
-  .flip .feature-grid .feature-copy {
-    order: 2;
-  }
-
-  .flip .feature-grid .feature-shot {
-    order: 1;
-  }
+  .flip .feature-copy { order: 2; }
+  .flip .feature-shot { order: 1; }
 
   .feature-shot {
     display: flex;
@@ -369,7 +497,6 @@ const APP_STORE_URL = '#download';
   }
 
   .feature-shot .phone {
-    width: min(300px, 76vw);
     box-shadow: 0 32px 64px -24px rgba(0, 0, 0, 0.7);
   }
 
@@ -390,6 +517,7 @@ const APP_STORE_URL = '#download';
     line-height: 1.15;
     letter-spacing: -0.02em;
     font-weight: 750;
+    text-wrap: balance;
   }
 
   .feature-copy > p {
@@ -405,13 +533,15 @@ const APP_STORE_URL = '#download';
     gap: 12px;
   }
 
-  .feature-copy li {
+  .feature-copy li,
+  .free-list li {
     color: var(--text-dim);
     padding-left: 28px;
     position: relative;
   }
 
-  .feature-copy li::before {
+  .feature-copy li::before,
+  .free-list li::before {
     content: '';
     position: absolute;
     left: 0;
@@ -423,6 +553,60 @@ const APP_STORE_URL = '#download';
     transform: rotate(-45deg) scale(0.8);
   }
 
+  /* ---- Free ---- */
+  .free {
+    padding: 88px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .free-card {
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    padding: 44px;
+    background:
+      radial-gradient(600px 240px at 0% 0%, rgba(62, 184, 169, 0.12), transparent),
+      var(--bg-raised);
+  }
+
+  .free-head {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .free-head p:not(.price) {
+    color: var(--text-dim);
+    margin-top: 8px;
+    font-size: 18px;
+  }
+
+  .price {
+    font-size: 96px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--teal);
+    flex: none;
+  }
+
+  .price .cur {
+    font-size: 44px;
+    vertical-align: 0.9em;
+    margin-right: 2px;
+  }
+
+  .free-list {
+    list-style: none;
+    margin-top: 36px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px 24px;
+  }
+
+  .free-list li {
+    color: var(--text);
+  }
+
   /* ---- Privacy ---- */
   .privacy {
     padding: 96px 0;
@@ -432,6 +616,9 @@ const APP_STORE_URL = '#download';
   .privacy-inner {
     max-width: 720px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .privacy p {
@@ -440,12 +627,71 @@ const APP_STORE_URL = '#download';
     font-size: 18px;
   }
 
-  .privacy a {
+  .privacy a,
+  .faq-more a {
     color: var(--indigo);
   }
 
-  .privacy a:hover {
+  .privacy a:hover,
+  .faq-more a:hover {
     text-decoration: underline;
+  }
+
+  /* ---- FAQ ---- */
+  .faq {
+    padding: 88px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .faq-inner {
+    max-width: 760px;
+  }
+
+  .faqs {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  details {
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 22px;
+  }
+
+  summary {
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    position: relative;
+    padding-right: 28px;
+  }
+
+  summary::-webkit-details-marker { display: none; }
+
+  summary::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-faint);
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  details[open] summary::after { content: '–'; }
+
+  details p {
+    margin-top: 12px;
+    color: var(--text-dim);
+  }
+
+  .faq-more {
+    margin-top: 24px;
+    color: var(--text-dim);
   }
 
   /* ---- Final CTA ---- */
@@ -472,9 +718,7 @@ const APP_STORE_URL = '#download';
 
   /* ---- Responsive ---- */
   @media (max-width: 860px) {
-    .hero {
-      padding-top: 64px;
-    }
+    .hero { padding-top: 56px; }
 
     .hero-grid,
     .feature-grid {
@@ -482,20 +726,25 @@ const APP_STORE_URL = '#download';
       gap: 48px;
     }
 
-    .flip .feature-grid .feature-copy {
-      order: 1;
-    }
+    .hero-shot { min-height: 0; }
+    .hero-shot .front { transform: none; }
+    .hero-shot .back { display: none; }
 
-    .flip .feature-grid .feature-shot {
-      order: 2;
-    }
+    .flip .feature-copy { order: 1; }
+    .flip .feature-shot { order: 2; }
 
-    .pillar-grid {
-      grid-template-columns: 1fr;
-    }
+    .pillar-grid { grid-template-columns: 1fr; }
 
-    .privacy-inner {
-      text-align: left;
-    }
+    .free-card { padding: 32px 24px; }
+    .free-head { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .free-list { grid-template-columns: 1fr 1fr; }
+
+    .privacy-inner { text-align: left; align-items: flex-start; }
+  }
+
+  @media (max-width: 480px) {
+    .free-list { grid-template-columns: 1fr; }
+    .cta-row :global(.btn) { width: 100%; justify-content: center; }
+    .free-pill { font-size: 13px; }
   }
 </style>

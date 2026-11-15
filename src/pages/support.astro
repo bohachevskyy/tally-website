@@ -3,32 +3,8 @@ import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 
-const faqs = [
-  {
-    q: 'Why does Tally ask for Screen Time permission?',
-    a: 'Tally is built on Apple’s Screen Time framework. That permission is what allows it to measure how long you use each app and to block apps when a limit runs out. The data is processed on-device by Apple’s APIs and never leaves your iPhone.',
-  },
-  {
-    q: 'What happens when I hit a limit?',
-    a: 'The app is blocked for the rest of the day. If you genuinely need back in, you can override the block by borrowing a set number of extra minutes — the clock keeps running, and the override is added to your stats so you can see how often you break each rule.',
-  },
-  {
-    q: 'Do limits reset automatically?',
-    a: 'Yes. Every limit resets at the start of each day. Set a rule once and Tally enforces it daily with no maintenance.',
-  },
-  {
-    q: 'Can I limit several apps with one rule?',
-    a: 'Yes. A rule can cover a single app or a group of apps that share one time budget.',
-  },
-  {
-    q: 'Does Tally drain my battery or track me?',
-    a: 'No. Tally has no background network activity, no analytics, and no servers. Usage monitoring is handled by iOS itself, which is highly efficient.',
-  },
-  {
-    q: 'How do I delete my data?',
-    a: 'Delete the app. All rules, usage history, and stats live only on your iPhone, so removing Tally removes everything.',
-  },
-];
+import { faqs } from '../data/faqs';
+import { CONTACT_EMAIL } from '../config';
 ---
 <Base
   title="Support — Tally"
@@ -36,11 +12,11 @@ const faqs = [
 >
   <Nav />
 
-  <main class="wrap doc">
+  <main class="wrap doc" id="main">
     <h1>Support</h1>
     <p class="intro">
       Stuck, found a bug, or have an idea? Email
-      <a href="mailto:dmytro.bohachevskyy@gmail.com">dmytro.bohachevskyy@gmail.com</a>
+      <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
       and you’ll get a reply from the person who builds Tally — usually within
       a day or two.
     </p>

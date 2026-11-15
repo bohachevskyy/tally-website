@@ -1,20 +1,22 @@
 ---
+import { CONTACT_EMAIL } from '../config';
+import Logo from './Logo.astro';
 const year = new Date().getFullYear();
 ---
 <footer>
   <div class="wrap inner">
     <div class="brand">
-      <span class="name">Tally</span>
-      <span class="tag">The screen-time app that keeps count.</span>
+      <span class="name"><Logo size={20} /> Tally</span>
+      <span class="tag">Free screen-time limits that keep count.</span>
     </div>
-    <nav>
-      <a href="/privacy">Privacy</a>
-      <a href="/support">Support</a>
-      <a href="mailto:dmytro.bohachevskyy@gmail.com">Contact</a>
+    <nav aria-label="Footer">
+      <a href="/privacy/">Privacy</a>
+      <a href="/support/">Support</a>
+      <a href={`mailto:${CONTACT_EMAIL}`}>Contact</a>
     </nav>
   </div>
   <div class="wrap legal">
-    © {year} Tally. Made for people who want their time back.
+    © {year} Tally. Free, private, and made for people who want their time back.
   </div>
 </footer>
 
@@ -35,10 +37,13 @@ const year = new Date().getFullYear();
   .brand {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
   }
 
   .name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     font-weight: 700;
     font-size: 17px;
   }
